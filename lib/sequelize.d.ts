@@ -250,7 +250,7 @@ declare module sequelize
          *
          * @param schema Name of the schema.
          */
-        dropSchema(schema):EventEmitter;
+        dropSchema(schema:string):EventEmitter;
 
         /**
          * Drop all schemas.
@@ -1011,7 +1011,7 @@ declare module sequelize
         changeColumn(tableName:string, attributeName:string, dataTypeOrOptions:any):EventEmitter;
         renameColumn(tableName:string, attrNameBefore:string, attrNameAfter:string):EventEmitter;
         addIndex(tableName:string, attributes:Array<any>, options?:QueryOptions):EventEmitter;
-        showIndex(tableName, options?:QueryOptions):EventEmitter;
+        showIndex(tableName:string, options?:QueryOptions):EventEmitter;
         getForeignKeysForTables(tableNames:Array<string>):EventEmitter;
         removeIndex(tableName:string, attributes:Array<string>):EventEmitter;
         removeIndex(tableName:string, indexName:string):EventEmitter;
@@ -1113,7 +1113,7 @@ declare module sequelize
         attributesToSQL(attributes:Array<any>):string;
         findAutoIncrementField<TInstance,TPojo>(factory:Model<TInstance,TPojo>):Array<string>;
         quoteTable(param:any, as:boolean):string;
-        quote(obj, parent, force):string;
+        quote(obj:any, parent:any, force:boolean):string;
         createTrigger(tableName:string, triggerName:string, timingType:string, fireOnArray:TriggerOptions, functionName:string, functionParams:Array<TriggerParam>):string;
         dropTrigger(tableName:string, triggerName:string):string;
         renameTrigger(tableName:string, oldTriggerName:string, newTriggerName:string):string;
@@ -1161,7 +1161,7 @@ declare module sequelize
         getConditionalJoins<TInstance, TPojo>(options:{where?:any}, originalDao:Model<TInstance, TPojo>):string;
         arrayValue(value:Array<string>, key:string, _key:string, factory?:any, logicResult?:any):string;
         hashToWhereConditions<TInstance, TPojo>(hash:any, dao:Model<TInstance, TPojo>, options?:HashToWhereConditionsOption):string;
-        booleanValue(value):string;
+        booleanValue(value: boolean):string;
     }
 
     interface Schema
@@ -1248,7 +1248,7 @@ declare module sequelize
         getFormattedDateString(s:string):string;
         stringToDate(s:string):Date;
         saveSuccessfulMigration(from:Migration, to:Migration, callback:(metaData:MetaInstance) => void):void;
-        deleteUndoneMigration(from:Migration, to:Migration, callback:() => void);
+        deleteUndoneMigration(from:Migration, to:Migration, callback:() => void): void;
         execute(options?:MigrationExecuteOptions):EventEmitter;
         isBefore(date:Date, options?:MigrationCompareOptions):boolean;
         isAfter(date:Date, options?:MigrationCompareOptions):boolean;
